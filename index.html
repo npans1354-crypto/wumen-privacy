@@ -8,18 +8,20 @@
 <p>WuMen is a light, humorous app that “translates” everyday phrases between partners and gives friendly advice. We respect your privacy and keep data collection to the minimum needed to make the app work.</p>
 <h2>What we process</h2>
 <ul>
-<li><b>Text you type or speak</b> for translation or advice is sent over an encrypted HTTPS connection to our server and to our AI provider (Anthropic) to generate a response. It is used only to return that response. We do not store it, and it is not linked to your identity or used for advertising or tracking.</li>
-<li><b>Speech recognition</b> converts your voice to text. Where your device supports it, this happens on-device. Audio is not saved.</li>
+<li><b>Text you type and speech transcripts</b> for translation or advice are sent over encrypted HTTPS to a dedicated WuMen Cloudflare Worker and then to Anthropic to generate a response. We do not retain the text or AI response in our own database or logs, and we do not associate it with the App Attest security record. Anthropic may retain API inputs and outputs for up to 30 days under its standard retention policy, subject to limited exceptions for legal obligations and Usage Policy enforcement. This content is not used for advertising or tracking.</li>
+<li><b>Speech recognition</b> uses Apple’s Speech framework to convert voice to text. Where supported, recognition happens on-device; otherwise Apple may process the audio. Raw microphone audio is not sent to our Cloudflare Worker or Anthropic and is not stored by us.</li>
 <li><b>Photos (Mood scanner)</b> are analyzed entirely on your device using Apple’s Vision framework. Photos are never uploaded and never stored by us. The Mood scanner is an entertainment feature and not a real emotion detector.</li>
+<li><b>App integrity and abuse prevention</b> uses Apple’s App Attest. The private key remains on the device. Our Worker stores a pseudonymous App Attest public key, the latest assertion counter, and daily quota counters to verify genuine app requests and prevent replay attacks. The security record is deleted after 180 days without a valid request. It is not combined with account or contact information and is not used for advertising or tracking.</li>
 </ul>
 <h2>What we do NOT do</h2>
 <ul>
 <li>No account or sign-up.</li>
 <li>No advertising and no third-party analytics/tracking SDKs.</li>
-<li>We do not sell or share your data.</li>
+<li>We do not sell personal data or share it for advertising or tracking.</li>
 </ul>
-<h2>Third parties</h2>
-<p>Text for AI translation/advice is processed by Anthropic (Claude) solely to produce the response. Standard server logs may contain technical request information (such as IP address and timing) for security and reliability.</p>
+<h2>Service providers and retention</h2>
+<p><b>Cloudflare</b> operates the dedicated WuMen Worker that receives, verifies, and forwards HTTPS requests. We use Cloudflare only to deliver and secure the service. The Worker is configured not to log request bodies or AI responses.</p>
+<p><b>Anthropic</b> processes the text and generated response through its commercial API. Under Anthropic’s standard retention policy, API inputs and outputs are deleted within 30 days, except where longer retention is required by law, for Usage Policy enforcement, or under another retention arrangement. <a href="https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data">Learn more from Anthropic.</a></p>
 <h2>Children</h2>
 <p>WuMen is intended for a general audience (12+) and is not directed at children.</p>
 <h2>Contact</h2>
